@@ -51,7 +51,7 @@ export const SimpleForm = () => {
             </div>
 
 
-            <div className="form-group">
+            <div className="form-group mt-3">
                 <input
                     type="text"
                     name="email"
