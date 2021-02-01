@@ -3,12 +3,14 @@ import './counter.css';
 
 export const CounterApp = () => {
 
-    const [{counter1, counter2}, setCounter] = useState({
+    const [state, setState] = useState({
         counter1: 10,
-        counter2: 20
+        counter2: 20,
+        counter3: 30,
+        counter4: 40
     });
 
-    //console.log(counter);
+    const { counter1, counter2 } = state;
 
     return (
         <>
@@ -19,9 +21,9 @@ export const CounterApp = () => {
             <button 
                 className="btn btn-primary"
                 onClick={ () => {
-                    setCounter({
-                        counter1: counter1 + 1,
-                        counter2: counter2
+                    setState({
+                        ...state,     // spread operator. This property states that the rest of the properties stay the same
+                        counter1: counter1 + 1
                     });
                 }}
             >
