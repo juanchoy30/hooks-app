@@ -8,7 +8,7 @@ export const FocusScreen = () => {
 
     const handClick = () => {
         inputRef.current.select();  // it would be the same to put document.querySelector('input').select();
-        console.log(inputRef)
+        // console.log(inputRef);
     }
 
 
