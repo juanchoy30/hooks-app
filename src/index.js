@@ -10,10 +10,11 @@ import ReactDOM from 'react-dom';
 // import { FocusScreen } from './components/04-useRef/FocusScreen';
 // import { RealExampleRef } from './components/04-useRef/RealExampleRef';
 // import { LayoutEffect } from './components/05-useLayoutEffect/LayoutEffect';
-import { Memorise } from './components/06-memos/Memorise';
+// import { Memorise } from './components/06-memos/Memorise';
+import { MemoHook } from './components/06-memos/MemoHook';
 
 
 ReactDOM.render(
-    <Memorise />,
+    <MemoHook />,
   document.getElementById('root')
 );
