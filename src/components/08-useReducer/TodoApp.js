@@ -3,6 +3,7 @@ import { todoReducer } from './todoReducer';
 import { useForm } from '../../hooks/useForm';
 
 import './styles.css';
+import { TodoList } from './TodoList';
 
 
 // useState and useReducer are almost the same. However, useState should be used
@@ -36,6 +37,13 @@ export const TodoApp = () => {
         dispatch( action );
     }
 
+    const handleToggle = ( todoId ) => {
+        dispatch({
+            type: 'toggle',
+            payload: todoId
+        })
+    } 
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -67,24 +75,11 @@ export const TodoApp = () => {
 
                 <div className="col-7">
 
-                    <ul className="list-group list-group-flush">
-                        {
-                            todos.map( (todo, i) => (
-                                <li
-                                    key={ todo.id }
-                                    className="list-group-item"
-                                    > 
-                                    <p className="text-center"> { i + 1 }. { todo.desc } </p>
-                                    <button
-                                        className="btn btn-danger"
-                                        onClick={ () => handleDelete( todo.id ) }
-                                        >
-                                        Delete
-                                    </button>
-                                </li>
-                            ))
-                        }
-                    </ul>
+                    <TodoList 
+                        todos={ todos }
+                        handleToggle={ handleToggle } 
+                        handleDelete={ handleDelete }
+                    />
 
                 </div>
 
