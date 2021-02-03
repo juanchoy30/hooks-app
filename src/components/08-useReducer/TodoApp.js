@@ -10,7 +10,6 @@ import './styles.css';
 // have to me run, useReducer must be used.
 
 const init = () => {
-
     return JSON.parse(localStorage.getItem('todos')) || [];    /// || if null return [] empty array
 };
 
@@ -23,8 +22,19 @@ export const TodoApp = () => {
     }); 
 
     useEffect( ()=> {
-        localStorage.setItem('todos', JSON.stringify( todos ))
+        localStorage.setItem('todos', JSON.stringify( todos ));
     }, [todos] );
+
+    const handleDelete = ( todoId ) => {
+        console.log(todoId)
+
+        const action = {
+            type: 'delete',
+            payload: todoId
+        }
+
+        dispatch( action );
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -67,6 +77,7 @@ export const TodoApp = () => {
                                     <p className="text-center"> { i + 1 }. { todo.desc } </p>
                                     <button
                                         className="btn btn-danger"
+                                        onClick={ () => handleDelete( todo.id ) }
                                         >
                                         Delete
                                     </button>
