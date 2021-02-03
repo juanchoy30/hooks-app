@@ -1,5 +1,6 @@
-import React, { useReducer } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import { todoReducer } from './todoReducer';
+import { useForm } from '../../hooks/useForm';
 
 import './styles.css';
 
@@ -8,24 +9,33 @@ import './styles.css';
 // when simple states or few things have to be change. When complex or many actions
 // have to me run, useReducer must be used.
 
-const initialState = [{
-    id: new Date().getTime(),
-    desc: 'Learn React',
-    done: false
-}];
+const init = () => {
+
+    return JSON.parse(localStorage.getItem('todos')) || [];    /// || if null return [] empty array
+};
 
 export const TodoApp = () => {
 
-    const [ todos, dispatch ] = useReducer( todoReducer, initialState );
+    const [ todos, dispatch ] = useReducer( todoReducer, [], init );
 
-    console.log( todos );
+    const [ { description }, handleInputChange, reset] = useForm({
+        description: ''
+    }); 
+
+    useEffect( ()=> {
+        localStorage.setItem('todos', JSON.stringify( todos ))
+    }, [todos] );
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if ( description.trim().length <= 1) {
+            return;
+        }   // Basic validation
         
         const newTodo = {
             id: new Date().getTime(),
-            desc: 'New task',
+            desc: description,
             done: false
         }
 
@@ -35,6 +45,7 @@ export const TodoApp = () => {
         }
 
         dispatch( action );
+        reset();
     }
 
     return (
@@ -78,6 +89,8 @@ export const TodoApp = () => {
                             className="form-control"
                             placeholder="Learn..."
                             autoComplete="off"
+                            value={ description }
+                            onChange={ handleInputChange }
                         />
 
                         <button
