@@ -18,15 +18,17 @@ export const AppRouter = () => {
 
                 <NavBar />
 
-                <Switch>
-                    {/* exact (Exact route) is important if the most general path is included at the begining */}
-                    <Route exact path="/" component={ HomeScreen} />  
-                    <Route exact path="/about" component={ AboutScreen} />
-                    <Route exact path="/login" component={ LoginScreen} />
-                    {/* <Route component={ HomeScreen } /> */}
-                    <Redirect to="/" />
-
-                </Switch>
+                <div className="container">
+                    <Switch>
+                        {/* exact (Exact route) is important if the most general path is included at the begining */}
+                        <Route exact path="/" component={ HomeScreen} />  
+                        <Route exact path="/about" component={ AboutScreen} />
+                        <Route exact path="/login" component={ LoginScreen} />
+                        {/* <Route component={ HomeScreen } /> */}
+                        <Redirect to="/" />
+                    </Switch>
+                </div>
+                
             </div>
         </Router>
     )
