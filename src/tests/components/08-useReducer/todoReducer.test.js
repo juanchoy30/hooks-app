@@ -30,22 +30,29 @@ describe('test on todoReducer', () => {
     });
 
     test('should delete a toDo', () => {
-
-        const todoId = 2;
        
         const action = {
             type: 'delete',
-            payload: todoId
-        }
-
-        const [ firstId ] = demoTodos;
+            payload: 2
+        };
 
         const state = todoReducer( demoTodos, action );
         expect( state.length ).toBe( 1 );
-        expect( state ).toEqual([ firstId ]);
+        expect( state ).toEqual([ demoTodos[0] ]);
 
+    });
+
+    test('should do the Toggle of the todo', () => {
+
+        const action = {
+            type: 'toggle',
+            payload: 1
+        };
+        
+        const state = todoReducer( demoTodos, action);
+        expect( state[0].done ).toBe( true );
+        expect( state[1] ).toEqual( demoTodos[1] );
 
     });
     
-
 })
